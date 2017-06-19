@@ -67,4 +67,17 @@ describe Image do
       FileUtils.rm(path + '/assets/tmp/%F75+%E7%E4%E3.jpg')
     end
   end
+
+  describe '#saved?' do
+    it 'returns false, if image not in the DB' do
+      DB[:images].delete
+      expect(image.saved?).to be false
+    end
+
+    it 'returns true, if image is in the DB' do
+      DB[:images].delete
+      DB[:images].insert(IMAGES[0])
+      expect(image.saved?).to be true
+    end
+  end
 end
