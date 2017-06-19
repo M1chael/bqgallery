@@ -14,7 +14,7 @@ googl = GooGL.new(config[:google_api])
 parser.images.each do |image|
   image = Image.new(image, googl)
   image.download(cookies)
-  if image.exif&.make&.casecmp('BQ') == 0
+  if image.exif&.make&.casecmp('BQ') == 0 && File.size(image.path).to_f / 2**20 < 10
     image.save
     bot.send_image(image)
     image.remove
