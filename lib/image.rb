@@ -11,6 +11,10 @@ class Image
     @post = googl.short(@post)
   end
 
+  def saved?
+    DB[:images].where(link: @link).count != 0
+  end
+
   def download(cookies)
     `wget -U 'BQ Gallery bot' -x --load-cookies #{cookies} -O #{@path} #{@link}`
     begin

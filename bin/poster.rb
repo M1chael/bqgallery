@@ -13,13 +13,15 @@ bot = Bot.new(token: config[:telegram_token], chat_id: config[:chat_id])
 googl = GooGL.new(config[:google_api])
 parser.images.each do |image|
   image = Image.new(image, googl)
-  image.download(cookies)
-  if image.exif&.make&.casecmp('BQ') == 0 && File.size(image.path).to_f / 2**20 < 10
-    image.save
-    bot.send_image(image)
-    image.remove
-  else
-    image.remove
+  if !image.saved?
+    image.download(cookies)
+    if image.exif&.make&.casecmp('BQ') == 0 && File.size(image.path).to_f / 2**20 < 10
+      image.save
+      bot.send_image(image)
+      image.remove
+    else
+      image.remove
+    end
   end
 end
 
