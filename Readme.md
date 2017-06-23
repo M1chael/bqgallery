@@ -8,8 +8,8 @@
 
 ### Зависимости
 
-* Установить ["зависимости Nokogiri"](http://www.nokogiri.org/tutorials/installing_nokogiri.html)
-* Установить ["зависимости Exif"](https://github.com/tonytonyjan/exif#installation)
+* Установить [зависимости Nokogiri](http://www.nokogiri.org/tutorials/installing_nokogiri.html)
+* Установить [зависимости Exif](https://github.com/tonytonyjan/exif#installation)
 * Установить зависимости sqlite3: `apt install sqlite3 libsqlite3-dev`
 
 ### Установка
@@ -78,7 +78,7 @@ uid INTEGER
 
 ### Файл сессии 4PDA
 
-Содержимое файла сессии может быть получено, например, с помощью расширения ["cookie-txt-export"](https://code.google.com/archive/p/cookie-txt-export/) для браузера Chromium.
+Содержимое файла сессии может быть получено, например, с помощью расширения [cookie-txt-export](https://code.google.com/archive/p/cookie-txt-export/) для браузера Chromium.
 
 ## Использование
 
