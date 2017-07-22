@@ -16,7 +16,7 @@ class Parser
   end
 
   def posts
-    @page.xpath('//table[@class="ipbtable"]').count - 4
+    @page.xpath('//table[@class="ipbtable" and @data-post]').count
   end
 
   private
