@@ -42,19 +42,19 @@ rspec
 :google_api: kO80J6jH_sk098dIu8
 # источники
 :sources:
-	:4pda:
-		# имя файла с сессией 4PDA
-		:cookies: 4pda.cookies
-		# ветки форума
-		:topics:
-			:club:
-				# номер ветки на 4PDA
-				:id: 758535
-				# страница, с которой начинать чтение ветки
-				:page: 620
-			:a4.5:
-				:id: 743943
-				:page: 40
+  :4pda:
+    # имя файла с сессией 4PDA
+    :cookies: 4pda.cookies
+    # ветки форума
+    :topics:
+      :club:
+        # номер ветки на 4PDA
+        :id: 758535
+        # страница, с которой начинать чтение ветки
+        :page: 620
+      :a4.5:
+        :id: 743943
+        :page: 40
 ```
 
 ### Структура БД
@@ -109,7 +109,7 @@ uid INTEGER
 check process listener.rb
 matching "listener.rb"
 start program = "/bin/bash -c 'export PATH=/home/user/.rvm/gems/ruby-2.3.0/bin:/home/user/.rvm/gems/ruby-2.3.0@global/bin:/home/user/.rvm/rubies/ruby-2.3.0/bin:/home/user/.rvm/gems/ruby-2.3.0/bin:/home/user/.rvm/gems/ruby-2.3.0@global/bin:/home/user/.rvm/rubies/ruby-2.3.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/home/user/.rvm/bin:/home/user/.rvm/bin; export GEM_HOME=/home/user/.rvm/gems/ruby-2.3.0; export GEM_PATH=/home/user/.rvm/gems/ruby-2.3.0:/home/user/.rvm/gems/ruby-2.3.0@global; export MY_RUBY_HOME=/home/user/.rvm/rubies/ruby-2.3.0; export IRBRC=/home/user/.rvm/rubies/ruby-2.3.0/.irbrc; /home/user/path/to/bin/listener.rb'" 
-	as uid userid and gid groupid
+  as uid userid and gid groupid
 stop program = "/bin/bash -c  'killall listener.rb'"
 ```
 1. Слушает сообщения из Telegram
