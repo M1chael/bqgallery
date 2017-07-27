@@ -40,6 +40,8 @@ rspec
 :chat_id: -0101234567890
 # токен Google API
 :google_api: kO80J6jH_sk098dIu8
+# место хранения логов
+:log: logs/bot.log
 # источники
 :sources:
   :4pda:

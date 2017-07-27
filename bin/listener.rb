@@ -10,7 +10,7 @@ require 'logger'
 wd = File.expand_path(File.dirname(__FILE__))
 config = YAML.load_file(wd + '/../assets/config.yml')
 DB = Sequel.sqlite(File.join(wd, '../assets', config[:db]))
-logger = Logger.new(config[:log], 'monthly')
+logger = Logger.new(wd + '/../' + config[:log], 'monthly')
 bot = Bot.new(token: config[:telegram_token], chat_id: config[:chat_id])
 
 begin
