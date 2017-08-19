@@ -16,8 +16,10 @@ bot = Bot.new(token: config[:telegram_token], chat_id: config[:chat_id])
 begin
   Telegram::Bot::Client.run(config[:telegram_token], logger: logger) do |telegram|
     telegram.listen do |message|
-      telegram.logger.info("data: #{message.data}, uid: #{message.from.id}, mid: #{message.message.message_id}, id: #{message.id}")
-      bot.callback(data: message.data, uid: message.from.id, mid: message.message.message_id, id: message.id)
+      if message.respond_to?(:data)
+        telegram.logger.info("data: #{message.data}, uid: #{message.from.id}, mid: #{message.message.message_id}, id: #{message.id}")
+        bot.callback(data: message.data, uid: message.from.id, mid: message.message.message_id, id: message.id)
+      end
     end
   end
 rescue => error
