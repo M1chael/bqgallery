@@ -107,13 +107,32 @@ uid INTEGER
 ### listener.rb
 
 0. Запускается, например, с помощью monit:
+
+`/etc/monit/conf.d/localhost`:
 ```
 check process listener.rb
 matching "listener.rb"
-start program = "/bin/bash -c 'export PATH=/home/user/.rvm/gems/ruby-2.3.0/bin:/home/user/.rvm/gems/ruby-2.3.0@global/bin:/home/user/.rvm/rubies/ruby-2.3.0/bin:/home/user/.rvm/gems/ruby-2.3.0/bin:/home/user/.rvm/gems/ruby-2.3.0@global/bin:/home/user/.rvm/rubies/ruby-2.3.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/home/user/.rvm/bin:/home/user/.rvm/bin; export GEM_HOME=/home/user/.rvm/gems/ruby-2.3.0; export GEM_PATH=/home/user/.rvm/gems/ruby-2.3.0:/home/user/.rvm/gems/ruby-2.3.0@global; export MY_RUBY_HOME=/home/user/.rvm/rubies/ruby-2.3.0; export IRBRC=/home/user/.rvm/rubies/ruby-2.3.0/.irbrc; /home/user/path/to/bin/listener.rb'" 
-  as uid userid and gid groupid
-stop program = "/bin/bash -c  'killall listener.rb'"
+start program = "/bin/bash -c '/home/user/path/bqgallery.sh'" as uid suer and gid group
+stop program = "/bin/bash -c  'killall bqgallery.r
 ```
+
+`/home/user/path/bqgallery.sh`:
+```
+#!/bin/bash
+
+. /home/user/path/export.sh
+/home/user/path/to/bin/listener.rb &
+```
+
+`/home/user/path/export.sh`:
+```
+export PATH=/home/bq/.rvm/gems/ruby-2.4.0/bin:/home/bq/.rvm/gems/ruby-2.4.0@global/bin:/usr/share/rvm/rubies/ruby-2.4.0/bin:/usr/share/rvm/bin:/home/bq/bin:/home/bq/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+export GEM_HOME=/home/bq/.rvm/gems/ruby-2.4.0
+export GEM_PATH=/home/bq/.rvm/gems/ruby-2.4.0:/home/bq/.rvm/gems/ruby-2.4.0@global
+export MY_RUBY_HOME=/usr/share/rvm/rubies/ruby-2.4.0
+export IRBRC=/usr/share/rvm/rubies/ruby-2.4.0/.irbrc
+```
+
 1. Слушает сообщения из Telegram
 2. Учитывает результаты голосования в БД
 3. Отправляет уведомления проголосовавшим пользователям
