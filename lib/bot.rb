@@ -3,9 +3,7 @@ require 'telegram/bot'
 class Bot
 	def initialize(options)
     options.each{ |key, value| instance_variable_set("@#{key}", value) }
-    kb = [[Telegram::Bot::Types::InlineKeyboardButton.new(text: '0', callback_data: 'rating'), 
-      Telegram::Bot::Types::InlineKeyboardButton.new(text: "\xE2\x9D\xA4", callback_data: 'like')]]
-    @markup = Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
+    @markup = markup(0)
 	end
 
   def send_image(image)
@@ -18,6 +16,12 @@ class Bot
       mid: @response['result']['message_id'], fid: @response['result']['photo'][-1]['file_id'])
   end
 
+  def markup(likes)
+    kb = [[Telegram::Bot::Types::InlineKeyboardButton.new(text: likes.to_s, callback_data: 'rating'), 
+      Telegram::Bot::Types::InlineKeyboardButton.new(text: "\xE2\x9D\xA4", callback_data: 'like')]]
+    Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)    
+  end
+
   def callback(options)
     Telegram::Bot::Client.run(@token) do |telegram| 
       if options[:data] == 'like'
@@ -26,9 +30,7 @@ class Bot
           rating = DB[:images][mid: options[:mid]][:rating] + 1
           DB[:images].where(mid: options[:mid]).update(rating: rating)
           DB[:likes].insert(mid: options[:mid], uid: options[:uid])
-          kb = [[Telegram::Bot::Types::InlineKeyboardButton.new(text: rating.to_s, callback_data: 'rating'), 
-            Telegram::Bot::Types::InlineKeyboardButton.new(text: "\xE2\x9D\xA4", callback_data: 'like')]]
-          markup = Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
+          markup = markup(rating)
           telegram.api.edit_message_reply_markup(chat_id: @chat_id, message_id: options[:mid], reply_markup: markup)
         else
           text = 'Вы проголосовали ранее'
