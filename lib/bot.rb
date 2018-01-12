@@ -18,7 +18,7 @@ class Bot
 
   def markup(likes)
     kb = [[Telegram::Bot::Types::InlineKeyboardButton.new(text: likes.to_s, callback_data: 'rating'), 
-      Telegram::Bot::Types::InlineKeyboardButton.new(text: "\xE2\x9D\xA4", callback_data: 'like')]]
+      Telegram::Bot::Types::InlineKeyboardButton.new(text: "✋️ Спасибо", callback_data: 'like')]]
     Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)    
   end
 
