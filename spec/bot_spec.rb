@@ -78,7 +78,7 @@ describe Bot do
     it 'shows ok-alert for first time vote' do
       DB[:images].delete
       DB[:images].insert(mid: @msg_id.message_id, rating: 0)
-      expect(api).to receive(:answer_callback_query).with(callback_query_id: @id, text: 'Ваш голос учтён')
+      expect(api).to receive(:answer_callback_query).with(callback_query_id: @id, text: 'Спасибо')
       bot.callback(data: @data, uid: @from_id.id, mid: @msg_id.message_id, id: @id)
     end
 
@@ -87,7 +87,7 @@ describe Bot do
       DB[:likes].delete
       DB[:images].insert(mid: @msg_id.message_id, rating: 0)
       DB[:likes].insert(mid: @msg_id.message_id, uid: @from_id.id)
-      expect(api).to receive(:answer_callback_query).with(callback_query_id: @id, text: 'Вы проголосовали ранее')
+      expect(api).to receive(:answer_callback_query).with(callback_query_id: @id, text: 'Вы уже выразили признательность за эту фотографию')
       bot.callback(data: @data, uid: @from_id.id, mid: @msg_id.message_id, id: @id)
     end
 

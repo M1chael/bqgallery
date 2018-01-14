@@ -26,14 +26,14 @@ class Bot
     Telegram::Bot::Client.run(@token) do |telegram| 
       if options[:data] == 'like'
         if DB[:likes].where(mid: options[:mid], uid: options[:uid]).count == 0
-          text = 'Ваш голос учтён'
+          text = 'Спасибо'
           rating = DB[:images][mid: options[:mid]][:rating] + 1
           DB[:images].where(mid: options[:mid]).update(rating: rating)
           DB[:likes].insert(mid: options[:mid], uid: options[:uid])
           markup = markup(rating)
           telegram.api.edit_message_reply_markup(chat_id: @chat_id, message_id: options[:mid], reply_markup: markup)
         else
-          text = 'Вы проголосовали ранее'
+          text = 'Вы уже выразили признательность за эту фотографию'
         end
         telegram.api.answer_callback_query(callback_query_id: options[:id], text: text)
       end
