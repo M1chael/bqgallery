@@ -18,7 +18,7 @@ class Image
   def download(cookies)
     `wget -U 'BQ Gallery bot' -x --load-cookies #{cookies} -O #{@path} #{@link}`
     begin
-      @exif = Exif::Data.new(@path)
+      @exif = Exif::Data.new(File.open(@path))
     rescue 
       @exif = nil
     end
